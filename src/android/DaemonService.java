@@ -43,8 +43,8 @@ public class DaemonService extends Service {
                 new Intent(this, MainActivity.class), 0);
 			builder.setContentIntent(contentIntent);
 			builder.setSmallIcon(iconResID);
-            builder.setContentTitle("KeepAppAlive");
-            builder.setContentText("DaemonService is runing...");
+            builder.setContentTitle("大鹏巡养通");
+            builder.setContentText("大鹏巡养通正在运行...");
             startForeground(NOTICE_ID,builder.build());
             // 如果觉得常驻通知栏体验不好
             // 可以通过启动CancelNoticeService，将通知移除，oom_adj值不变

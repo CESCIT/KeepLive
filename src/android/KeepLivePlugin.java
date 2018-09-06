@@ -30,7 +30,7 @@ public class KeepLivePlugin extends CordovaPlugin {
         if (action.equals("start")) {
             //以下用原生代码打开一个Act1Activity（可以理解为让界面跳转到Act1Activity这个界面）
             //PS：原生很多地方都要获取当前Activity的实例对象（如果在Activity里就用this），在CordovaPlugin用的是cordova.getActivity()
-            Toast.makeText(cordova.getActivity(),"start",Toast.LENGTH_LONG).show();
+            //Toast.makeText(cordova.getActivity(),"start",Toast.LENGTH_LONG).show();
             Intent intent = new Intent(cordova.getActivity(), DaemonService.class);
             //传入参数，参数分别是key和value
             cordova.getActivity().startService(intent);
