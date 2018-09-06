@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
-
+import android.app.PendingIntent;
+import android.support.annotation.RequiresApi;
+import io.cordova.gzsjgxcordova.MainActivity;
 
 /**
  * Created by 18603 on 2018/6/1.
@@ -17,29 +19,37 @@ public class DaemonService extends Service {
     private static final String TAG = "weid";
     public static final int NOTICE_ID = 100;
     public static final boolean DEBUG = true;
+	public static final String iconname = "icon";//icon res name
+    public static final String PACKAGE_NAME = "com.cesc.ewater.cordovaPlugin";
 
-    public static final String PACKAGE_NAME = "com.jiangdg.keepappalive";
-
+	public DaemonService(){
+		
+	}
     @Override
     public IBinder onBind(Intent intent) {
-        return null;
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 
-
+	@RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onCreate() {
         super.onCreate();
-            Log.d(TAG,"DaemonService---->onCreate被调用，启动前台service");
+            //Log.d(TAG,"DaemonService---->onCreate被调用，启动前台service");
         //如果API大于18，需要弹出一个可见通知
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2){
+			int iconResID=this.getResources().getIdentifier(iconname,"mipmap",this.getPackageName());
             Notification.Builder builder = new Notification.Builder(this);
+			PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
+                new Intent(this, MainActivity.class), 0);
+			builder.setContentIntent(contentIntent);
+			builder.setSmallIcon(iconResID);
             builder.setContentTitle("KeepAppAlive");
             builder.setContentText("DaemonService is runing...");
             startForeground(NOTICE_ID,builder.build());
             // 如果觉得常驻通知栏体验不好
             // 可以通过启动CancelNoticeService，将通知移除，oom_adj值不变
-            Intent intent = new Intent(this,CancelNoticeService.class);
-            startService(intent);
+            //Intent intent = new Intent(this,CancelNoticeService.class);
+            //startService(intent);
         }else{
             startForeground(NOTICE_ID,new Notification());
         }

@@ -8,6 +8,14 @@
       "android"
     ]
   },
+   "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CESCIT/KeepLive.git"
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
